@@ -7,7 +7,6 @@ struct dLL {
     struct dLL* nxt;
 };
 
-// Create a new node
 struct dLL* New_node(int d) {
     struct dLL* new = (struct dLL*)malloc(sizeof(struct dLL));
     if (new == NULL) {
@@ -20,7 +19,7 @@ struct dLL* New_node(int d) {
     return new;
 }
 
-// Insert at end
+
 void insert(struct dLL** head, int d) {
     struct dLL* new = New_node(d);
     if (new == NULL) return;
@@ -35,7 +34,7 @@ void insert(struct dLL** head, int d) {
     new->pre = temp;
 }
 
-// Delete by value
+
 void deleteValue(struct dLL** head, int key) {
     struct dLL* temp = *head;
     while (temp != NULL && temp->data != key)
@@ -47,14 +46,13 @@ void deleteValue(struct dLL** head, int key) {
     if (temp->pre != NULL)
         temp->pre->nxt = temp->nxt;
     else
-        *head = temp->nxt;  // deleting head
+        *head = temp->nxt; 
     if (temp->nxt != NULL)
         temp->nxt->pre = temp->pre;
     free(temp);
     printf("Deleted %d from list.\n", key);
 }
 
-// Search
 int search(struct dLL* head, int key) {
     int pos = 0;
     while (head != NULL) {
@@ -65,7 +63,6 @@ int search(struct dLL* head, int key) {
     return -1;
 }
 
-// Display list
 void display(struct dLL* head) {
     printf("List: ");
     while (head != NULL) {

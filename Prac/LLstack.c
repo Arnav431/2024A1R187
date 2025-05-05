@@ -66,10 +66,9 @@ void display(struct Node* top) {
 int main() {
     struct Node* stack = NULL;
     int choice, val;
+    printf("1. Push\n2. Pop\n3. Peek\n4. Display Stack\n5. Exit\n");
 
     while (1) {
-        printf("\n--- Menu ---\n");
-        printf("1. Push\n2. Pop\n3. Peek\n4. Display Stack\n5. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
