@@ -83,13 +83,11 @@ void display(node* head) {
 int main() {
     node* head = NULL;
     int choice, val, pos;
+    printf("1. Insert\n2. Delete\n3. Search\n4. Display\n5. Exit\n");
 
     while (1) {
-        printf("\n--- Menu ---\n");
-        printf("1. Insert\n2. Delete\n3. Search\n4. Display\n5. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
-
         switch (choice) {
             case 1:
                 printf("Enter value to insert: ");
