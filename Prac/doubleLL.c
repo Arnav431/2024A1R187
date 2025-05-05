@@ -78,10 +78,9 @@ void display(struct dLL* head) {
 int main() {
     struct dLL* head = NULL;
     int choice, val, pos;
+    printf("1. Insert\n2. Delete\n3. Search\n4. Display\n5. Exit\n");
 
     while (1) {
-        printf("\n--- Menu ---\n");
-        printf("1. Insert\n2. Delete\n3. Search\n4. Display\n5. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
