@@ -6,7 +6,6 @@ struct Node {
     struct Node* next;
 };
 
-// Create a new node
 struct Node* newNode(int d) {
     struct Node* new = (struct Node*)malloc(sizeof(struct Node));
     if (new == NULL) {
@@ -18,31 +17,24 @@ struct Node* newNode(int d) {
     return new;
 }
 
-// Insert after a given node
-void insertAfter(struct Node* head, int key, int d) {
-    if (head == NULL) {
-        printf("List is empty.\n");
-        return;
+void insert(struct Node** head, int d) {
+    struct Node* new = newNode(d);
+    if (new == NULL) return;
+
+    if (*head == NULL) {
+        new->next = new;
+        *head = new;
+    } else {
+        struct Node* temp = *head;
+        while (temp->next != *head)
+            temp = temp->next;
+        
+        temp->next = new;
+        new->next = *head;
     }
-
-    struct Node* temp = head;
-    do {
-        if (temp->data == key) {
-            struct Node* new = newNode(d);
-            if (new == NULL) return;
-
-            new->next = temp->next;
-            temp->next = new;
-            printf("Inserted %d after %d.\n", d, key);
-            return;
-        }
-        temp = temp->next;
-    } while (temp != head);
-
-    printf("Value %d not found in list.\n", key);
+    printf("%d Inserted.\n", d);
 }
 
-// Delete by value
 void deleteValue(struct Node** head, int key) {
     if (*head == NULL) {
         printf("List is empty.\n");
@@ -52,9 +44,8 @@ void deleteValue(struct Node** head, int key) {
     struct Node* temp = *head;
     struct Node* prev = NULL;
 
-    // If head node itself holds the key
     if (temp->data == key) {
-        if (temp->next == *head) { // Only one node
+        if (temp->next == *head) {
             free(temp);
             *head = NULL;
         } else {
@@ -63,14 +54,13 @@ void deleteValue(struct Node** head, int key) {
                 temp = temp->next;
             }
             prev->next = temp->next;
-            *head = temp->next;  // New head
+            *head = temp->next;
             free(temp);
         }
         printf("Deleted %d from list.\n", key);
         return;
     }
 
-    // Search for the node to delete
     prev = temp;
     temp = temp->next;
     while (temp != *head && temp->data != key) {
@@ -88,7 +78,6 @@ void deleteValue(struct Node** head, int key) {
     printf("Deleted %d from list.\n", key);
 }
 
-// Search
 int search(struct Node* head, int key) {
     if (head == NULL) return -1;
     struct Node* temp = head;
@@ -101,39 +90,38 @@ int search(struct Node* head, int key) {
     return -1;
 }
 
-// Display list
 void display(struct Node* head) {
     if (head == NULL) {
         printf("List is empty.\n");
         return;
     }
     struct Node* temp = head;
-    printf("List: ");
+    printf("Circular List: [");
     do {
-        printf("%d ", temp->data);
+        printf("%d", temp->data);
         temp = temp->next;
+        if (temp != head) {
+            printf(", ");
+        }
     } while (temp != head);
-    printf("\n");
+    printf("]\n");
 }
 
-// MAIN
 int main() {
     struct Node* head = NULL;
-    int choice, val, key, pos;
+    int choice, val, pos;
+    printf("--- Menu ---\n");
+    printf("1. Insert\n2. Delete\n3. Search\n4. Display\n5. Exit\n");
 
     while (1) {
-        printf("\n--- Menu ---\n");
-        printf("1. Insert after a value\n2. Delete\n3. Search\n4. Display\n5. Exit\n");
         printf("Enter choice: ");
         scanf("%d", &choice);
 
         switch (choice) {
             case 1:
-                printf("Enter the value to insert after: ");
-                scanf("%d", &key);
                 printf("Enter value to insert: ");
                 scanf("%d", &val);
-                insertAfter(head, key, val);
+                insert(&head, val);
                 break;
             case 2:
                 printf("Enter value to delete: ");

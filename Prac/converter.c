@@ -12,7 +12,7 @@ char strStack[MAX][MAX];
 int strTop = -1;
 
 
-int isOperator(char c) {
+int isOp(char c) {
     return (c == '+' || c == '-' || c == '*' || c == '/' || c == '^');
 }
 
@@ -63,9 +63,9 @@ void infixToPostfix(char infix[], char postfix[]) {
         else if (c == ')') {
             while (!isEmpty() && peek() != '(')
                 postfix[k++] = pop();
-            pop(); // remove '('
+            pop();
         }
-        else if (isOperator(c)) {
+        else if (isOp(c)) {
             while (!isEmpty() && precedence(c) <= precedence(peek())) {
                 if (c == '^' && peek() == '^') break; // right assoc
                 postfix[k++] = pop();
@@ -97,7 +97,7 @@ void postfixToInfix(char postfix[], char infix[]) {
             char operand[2] = { postfix[i], '\0' };
             pushStr(operand);
         }
-        else if (isOperator(postfix[i])) {
+        else if (isOp(postfix[i])) {
             strcpy(op2, popStr());
             strcpy(op1, popStr());
             sprintf(exp, "(%s%c%s)", op1, postfix[i], op2);
@@ -116,7 +116,7 @@ void prefixToInfix(char prefix[], char infix[]) {
             char operand[2] = { prefix[i], '\0' };
             pushStr(operand);
         }
-        else if (isOperator(prefix[i])) {
+        else if (isOp(prefix[i])) {
             strcpy(op1, popStr());
             strcpy(op2, popStr());
             sprintf(exp, "(%s%c%s)", op1, prefix[i], op2);

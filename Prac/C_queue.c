@@ -51,8 +51,9 @@ void Display() {
 
 int main() {
     int choice;
+    printf("\nMenue:\n\t1. Enqueue\n\t2. Dequeue\n\t3. Display\n\t4. Exit\n");
     while (1) {
-        printf("\nMenue:\n\t1. Enqueue\n\t2. Dequeue\n\t3. Display\n\t4. Exit\n");
+        
         printf("\nEnter Choice>\t");
         scanf("%d", &choice);
 
