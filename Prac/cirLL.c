@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node {
+typedef struct Node {
     int data;
     struct Node* next;
-};
+} node;
 
-struct Node* newNode(int d) {
-    struct Node* new = (struct Node*)malloc(sizeof(struct Node));
+node* newNode(int d) {
+    node* new = (node*)malloc(sizeof(node));
     if (new == NULL) {
         printf("Memory allocation failed!\n");
         return NULL;
@@ -17,32 +17,56 @@ struct Node* newNode(int d) {
     return new;
 }
 
-void insert(struct Node** head, int d) {
-    struct Node* new = newNode(d);
+void insert(node** head, int d) {
+    node* new = newNode(d);
     if (new == NULL) return;
 
     if (*head == NULL) {
         new->next = new;
         *head = new;
     } else {
-        struct Node* temp = *head;
-        while (temp->next != *head)
-            temp = temp->next;
-        
+        node* temp = *head;
+        while (temp->next != *head) temp = temp->next;
         temp->next = new;
         new->next = *head;
     }
     printf("%d Inserted.\n", d);
 }
 
-void deleteValue(struct Node** head, int key) {
+int search(node* head, int key) {
+    if (head == NULL) return -1;
+    node* temp = head;
+    int pos = 0;
+    do {
+        if (temp->data == key) return pos;
+        temp = temp->next;
+        pos++;
+    } while (temp != head);
+    return -1;
+}
+
+void display(node* head) {
+    if (head == NULL){ printf("List is empty.\n"); return;}
+    node* temp = head;
+    printf("Circular List: [");
+    do {
+        printf("%d", temp->data);
+        temp = temp->next;
+        if (temp != head) {
+            printf(", ");
+        }
+    } while (temp != head);
+    printf("]\n");
+}
+
+void deleteValue(node** head, int key) {
     if (*head == NULL) {
         printf("List is empty.\n");
         return;
     }
 
-    struct Node* temp = *head;
-    struct Node* prev = NULL;
+    node* temp = *head;
+    node* prev = NULL;
 
     if (temp->data == key) {
         if (temp->next == *head) {
@@ -78,37 +102,9 @@ void deleteValue(struct Node** head, int key) {
     printf("Deleted %d from list.\n", key);
 }
 
-int search(struct Node* head, int key) {
-    if (head == NULL) return -1;
-    struct Node* temp = head;
-    int pos = 0;
-    do {
-        if (temp->data == key) return pos;
-        temp = temp->next;
-        pos++;
-    } while (temp != head);
-    return -1;
-}
-
-void display(struct Node* head) {
-    if (head == NULL) {
-        printf("List is empty.\n");
-        return;
-    }
-    struct Node* temp = head;
-    printf("Circular List: [");
-    do {
-        printf("%d", temp->data);
-        temp = temp->next;
-        if (temp != head) {
-            printf(", ");
-        }
-    } while (temp != head);
-    printf("]\n");
-}
 
 int main() {
-    struct Node* head = NULL;
+    node* head = NULL;
     int choice, val, pos;
     printf("--- Menu ---\n");
     printf("1. Insert\n2. Delete\n3. Search\n4. Display\n5. Exit\n");
