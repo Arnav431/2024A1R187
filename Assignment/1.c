@@ -62,16 +62,16 @@ void display(node* t) {
 
 int main() {
     node* stack = NULL;
-    int choice, val;
+    int ch, val;
     
     printf("=== Stack Operations ===\n");
     printf("1. Push\n2. Pop\n3. Peek\n4. Display\n5. Exit\n");
 
     while (1) {
-        printf("Enter choice: ");
-        scanf("%d", &choice);
+        printf("Enter ch: ");
+        scanf("%d", &ch);
 
-        switch (choice) {
+        switch (ch) {
             case 1:
                 printf("Enter value to push: ");
                 scanf("%d", &val);
@@ -94,7 +94,7 @@ int main() {
                 printf("Exiting...\n");
                 return 0;
             default:
-                printf("Invalid choice!\n");
+                printf("Invalid ch!\n");
         }
     }
     return 0;
