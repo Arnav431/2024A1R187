@@ -71,20 +71,20 @@ int main() {
     printf("Enter number of nodes: ");
     scanf("%d", &n);
 
-    printf("Enter %d values:\n", n);
+    printf("Enter %d values:\t", n);
     for(int i = 0; i < n; i++) {
         scanf("%d", &val);
         root = insert(root, val);
     }
 
-    printf("\nInorder traversal: ");
+    printf("Inorder traversal: ");
     inorder(root);
 
     printf("\nEnter value to delete: ");
     scanf("%d", &val);
     root = deleteNode(root, val);
 
-    printf("Inorder traversal after deletion: ");
+    printf("\nInorder traversal after deletion: ");
     inorder(root);
     printf("\n");
 

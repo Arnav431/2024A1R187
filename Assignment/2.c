@@ -68,11 +68,11 @@ void display() {
 int main() {
     int choice, val;
     
-    printf("\n=== Queue Operations ===\n");
+    printf("=== Queue Operations ===\n");
     printf("1. Enqueue\n2. Dequeue\n3. Peek\n4. Display\n5. Exit\n");
 
     while (1) {
-        printf("\nEnter choice: ");
+        printf("Enter choice: ");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -89,7 +89,7 @@ int main() {
             case 3:
                 val = peek();
                 if (val != -1)
-                    printf("f element: %d\n", val);
+                    printf("front element: %d\n", val);
                 break;
             case 4:
                 display();

@@ -64,11 +64,11 @@ int main() {
     node* stack = NULL;
     int choice, val;
     
-    printf("\n=== Stack Operations ===\n");
+    printf("=== Stack Operations ===\n");
     printf("1. Push\n2. Pop\n3. Peek\n4. Display\n5. Exit\n");
 
     while (1) {
-        printf("\nEnter choice: ");
+        printf("Enter choice: ");
         scanf("%d", &choice);
 
         switch (choice) {
